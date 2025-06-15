@@ -7,6 +7,8 @@ Native networking solution that uses concepts from [Axios.js](https://axios-http
 
 ## Usage
 
+### Body-less request
+
 ```swift
 import Avios
 
