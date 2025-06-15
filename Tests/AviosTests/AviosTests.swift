@@ -8,8 +8,22 @@ fileprivate struct Post: Codable, Hashable {
     var body: String
 }
 
+/// Generates typicode endpoint.
+/// ```swift
+/// // Argument have to be not starting with slash
+/// let getPostsEndpoint: String = typicodeUrl("posts")
+/// ```
+fileprivate func typicodeUrl(_ route: String) -> String {
+    return "https://jsonplaceholder.typicode.com/\(route)"
+}
+
+fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod) async throws {
+    let (_, res) = try await Avios.shared.custom(typicodeUrl(route), method: method)
+    #expect(res.isOk())
+}
+
 @Test func getMethod() async throws {
-    let (data, response) = try await Avios.shared.get("https://jsonplaceholder.typicode.com/posts", headers: nil)
+    let (data, response) = try await Avios.shared.get(typicodeUrl("posts"), headers: nil)
     
     // Response have to be fine here
     #expect(response.isOk())
@@ -19,4 +33,20 @@ fileprivate struct Post: Codable, Hashable {
     
     // Array should be non-empty
     #expect(posts.count > 0)
+}
+
+@Test func postMethod() async throws {
+    try await expectThatOk("posts", method: .post)
+}
+
+@Test func putMethod() async throws {
+    try await expectThatOk("posts/1", method: .put)
+}
+
+@Test func patchMethod() async throws {
+    try await expectThatOk("posts/1", method: .patch)
+}
+
+@Test func deleteMethod() async throws {
+    try await expectThatOk("posts/1", method: .delete)
 }
