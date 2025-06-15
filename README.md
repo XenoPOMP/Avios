@@ -8,6 +8,8 @@ Native networking solution that uses concepts from [Axios.js](https://axios-http
 ## Usage
 
 ```swift
+import Avios
+
 struct Post: Codable {
     var userId: Int
     var id: Int
