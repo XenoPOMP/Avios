@@ -66,4 +66,4 @@ let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, 
 ```
 
 ## Todo
-[ ] Base URL option
+- [ ] Base URL option
