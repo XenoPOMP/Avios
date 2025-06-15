@@ -8,6 +8,12 @@ fileprivate struct Post: Codable, Hashable {
     var body: String
 }
 
+fileprivate struct PostDto: Codable {
+    var title: String
+    var body: String
+    var usedId: Int
+}
+
 fileprivate struct NonPost: Codable {
     var nonPostId: Int
 }
@@ -74,4 +80,21 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, sta
 @Test func handleStatusCodes() async throws {
     let (_, res) = try await Avios.shared.custom(typicodeUrl("this-path-does-not-exist"), method: .patch)
     #expect(res.httpResponse?.statusCode == 404)
+}
+
+@Test func withBody() async throws {
+    let body = PostDto(title: "foo", body: "bar", usedId: 1)
+    let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, headers: [
+        "Content-type": "application/json; charset=UTF-8"
+    ])
+    
+    // Check status
+    #expect(res.isOk())
+    #expect(res.httpResponse?.statusCode == 201)
+    
+    // Decoding the result
+    let result = try data.decode(into: PostDto.self)
+    
+    #expect(body.body == result.body)
+    #expect(body.title == result.title)
 }

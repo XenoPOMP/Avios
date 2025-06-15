@@ -119,7 +119,7 @@ class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Se
         request.httpBody = data
         
         // Get result from HTTP Request
-        let result: AviosResponse = try await URLSession.shared.upload(for: request, from: data, delegate: self)
+        let result: AviosResponse = try await URLSession.shared.data(for: request)
         return result
     }
     
