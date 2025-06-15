@@ -8,6 +8,10 @@ fileprivate struct Post: Codable, Hashable {
     var body: String
 }
 
+fileprivate struct NonPost: Codable {
+    var nonPostId: Int
+}
+
 /// Generates typicode endpoint.
 /// ```swift
 /// // Argument have to be not starting with slash
@@ -34,6 +38,21 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, sta
     
     // Array should be non-empty
     #expect(posts.count > 0)
+}
+
+@Test func getSinglePost() async throws {
+    let (data, response) = try await Avios.shared.get(typicodeUrl("posts/2"), headers: nil)
+    
+    // Response have to be fine here
+    #expect(response.isOk())
+    
+    // Trying to decode posts here
+    _ = try data.decode(into: Post.self)
+    
+    // Code below should fail
+    #expect(throws: Error.self) {
+        _ = try data.decode(into: NonPost.self)
+    }
 }
 
 @Test func postMethod() async throws {
