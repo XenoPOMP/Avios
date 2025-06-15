@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Data {
+public extension Data {
     /**
      Helper method. Tries to decode self into given type.
      
