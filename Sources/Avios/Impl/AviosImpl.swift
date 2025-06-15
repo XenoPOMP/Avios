@@ -15,7 +15,7 @@ enum AviosError: Error {
 /// Elegant implementation of networking, using concepts from  axios (JavaScript library)
 @available(macOS 13, *)
 @available(iOS 13, *)
-final class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
+class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
     
     /// Generate Avios client with default options
