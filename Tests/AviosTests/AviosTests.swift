@@ -28,13 +28,13 @@ fileprivate func typicodeUrl(_ route: String) -> String {
 }
 
 fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, statusCode: Int = 200) async throws {
-    let (_, res) = try await Avios.shared.custom(typicodeUrl(route), method: method)
+    let (_, res) = try await AviosImpl.shared.custom(typicodeUrl(route), method: method)
     #expect(res.isOk())
     #expect(res.httpResponse?.statusCode == statusCode)
 }
 
 @Test func getMethod() async throws {
-    let (data, response) = try await Avios.shared.get(typicodeUrl("posts"), headers: nil)
+    let (data, response) = try await AviosImpl.shared.get(typicodeUrl("posts"), headers: nil)
     
     // Response have to be fine here
     #expect(response.isOk())
@@ -47,7 +47,7 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, sta
 }
 
 @Test func getSinglePost() async throws {
-    let (data, response) = try await Avios.shared.get(typicodeUrl("posts/2"), headers: nil)
+    let (data, response) = try await AviosImpl.shared.get(typicodeUrl("posts/2"), headers: nil)
     
     // Response have to be fine here
     #expect(response.isOk())
@@ -78,13 +78,13 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, sta
 }
 
 @Test func handleStatusCodes() async throws {
-    let (_, res) = try await Avios.shared.custom(typicodeUrl("this-path-does-not-exist"), method: .patch)
+    let (_, res) = try await AviosImpl.shared.custom(typicodeUrl("this-path-does-not-exist"), method: .patch)
     #expect(res.httpResponse?.statusCode == 404)
 }
 
 @Test func withBody() async throws {
     let body = PostDto(title: "foo", body: "bar", usedId: 1)
-    let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, headers: [
+    let (data, res) = try await AviosImpl.shared.post(typicodeUrl("posts"), body: body, headers: [
         "Content-type": "application/json; charset=UTF-8"
     ])
     
