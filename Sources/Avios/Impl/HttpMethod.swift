@@ -5,7 +5,7 @@
 //  Created by Александр on 15.06.2025.
 //
 
-enum HttpMethod: String {
+public enum HttpMethod: String {
     case get = "GET"
     case post = "POST"
     case patch = "PATCH"

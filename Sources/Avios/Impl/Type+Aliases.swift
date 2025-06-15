@@ -7,5 +7,5 @@
 
 import Foundation
 
-typealias Headers = [String: String]
-typealias AviosResponse = (Data, URLResponse)
+public typealias Headers = [String: String]
+public typealias AviosResponse = (Data, URLResponse)

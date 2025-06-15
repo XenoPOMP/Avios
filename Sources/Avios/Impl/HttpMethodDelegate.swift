@@ -6,7 +6,7 @@
 //
 
 /// This protocol describes all available HTTP-related methods on Avios
-protocol HttpMethodDelegate {
+public protocol HttpMethodDelegate {
     @available(iOS 13, *) func get(_ url: String, headers: Headers?) async throws -> AviosResponse
     
     @available(iOS 13, *) func post(_ url: String, headers: Headers?) async throws -> AviosResponse

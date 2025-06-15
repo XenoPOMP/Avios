@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AviosError: Error {
+public enum AviosError: Error {
     /// Error with parsing stringified url
     case invalidRequest
 }
@@ -15,18 +15,18 @@ enum AviosError: Error {
 /// Elegant implementation of networking, using concepts from  axios (JavaScript library)
 @available(macOS 13, *)
 @available(iOS 13, *)
-class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
+public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
     
     /// Generate Avios client with default options
-    override init() {
+    public override init() {
         self.defaultHeaders = [
             "Content-Type": "application/json"
         ]
     }
     
     /// Shared instance of Avios
-    static let shared: Avios = Avios()
+    public static let shared: Avios = Avios()
     
     /// This method generates ready-to-use URLRequest object
     private func createRequest(
@@ -58,7 +58,7 @@ class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Se
     }
     
     /// Define custom HTTP Request
-    func custom(
+    public func custom(
         _ url: String,
         method: HttpMethod,
         headers: Headers? = nil
@@ -71,7 +71,7 @@ class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Se
     }
     
     /// Define custom HTTP Request with body
-    func custom<Body : Encodable>(
+    public func custom<Body : Encodable>(
         _ url: String,
         method: HttpMethod,
         body: Body,
@@ -91,47 +91,47 @@ class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Se
         return result
     }
     
-    func get(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func get(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .get, headers: headers)
     }
     
-    func post(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func post(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .post, headers: headers)
     }
     
-    func post<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
+    public func post<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
         try await self.custom(url, method: .post, body: body, headers: headers)
     }
     
-    func patch(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func patch(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .patch, headers: headers)
     }
     
-    func patch<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
+    public func patch<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
         try await self.custom(url, method: .patch, body: body, headers: headers)
     }
     
-    func update(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func update(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .update, headers: headers)
     }
     
-    func update<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
+    public func update<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
         try await self.custom(url, method: .update, body: body, headers: headers)
     }
     
-    func put(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func put(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .put, headers: headers)
     }
     
-    func put<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
+    public func put<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
         try await self.custom(url, method: .put, body: body, headers: headers)
     }
     
-    func delete(_ url: String, headers: Headers?) async throws -> AviosResponse {
+    public func delete(_ url: String, headers: Headers?) async throws -> AviosResponse {
         try await self.custom(url, method: .delete, headers: headers)
     }
     
-    func delete<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
+    public func delete<Body>(_ url: String, body: Body, headers: Headers?) async throws -> AviosResponse where Body : Encodable {
         try await self.custom(url, method: .delete, body: body, headers: headers)
     }
 }
