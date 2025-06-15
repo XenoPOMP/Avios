@@ -8,10 +8,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: swift-actions/setup-swift@v2
+        name: 🐦 Setting up Swift environment
         with:
           swift-version: '6.1.0'
       - uses: actions/checkout@v4
-      - name: Build
+        name: 🤖 Fetching repository
+      - name: 🔨 Building project
         run: swift build
-      - name: Run tests
+      - name: 🧪 Running tests
         run: swift test
