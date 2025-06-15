@@ -1,5 +1,5 @@
 //
-//  AviosImpl.swift
+//  Avios.swift
 //  Avios
 //
 //  Created by Александр on 15.06.2025.
@@ -15,7 +15,7 @@ enum AviosError: Error {
 /// Elegant implementation of networking, using concepts from  axios (JavaScript library)
 @available(macOS 13, *)
 @available(iOS 13, *)
-class AviosImpl: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
+class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
     
     /// Generate Avios client with default options
@@ -26,7 +26,7 @@ class AviosImpl: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecke
     }
     
     /// Shared instance of Avios
-    static let shared: AviosImpl = AviosImpl()
+    static let shared: Avios = Avios()
     
     /// This method generates ready-to-use URLRequest object
     private func createRequest(
