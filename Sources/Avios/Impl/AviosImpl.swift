@@ -12,27 +12,17 @@ public enum AviosError: Error {
     case invalidRequest
 }
 
-public class AviosDefaults {
-    public static let headers: Headers = [
-        "Content-Type": "application/json"
-    ]
-    
-    public static let baseUrl: String? = nil
-}
-
 /// Elegant implementation of networking, using concepts from  axios (JavaScript library)
 @available(macOS 13, *)
 @available(iOS 13, *)
 public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
-    private var baseUrl: String?
     
-    public init(
-        defaultHeaders: Headers = AviosDefaults.headers,
-        baseUrl: String? = nil
-    ) {
-        self.defaultHeaders = defaultHeaders
-        self.baseUrl = baseUrl
+    /// Generate Avios client with default options
+    public override init() {
+        self.defaultHeaders = [
+            "Content-Type": "application/json"
+        ]
     }
     
     /// Shared instance of Avios
