@@ -4,7 +4,7 @@
 </div>
 
 ![GitHub Tag](https://img.shields.io/github/v/tag/XenoPOMP/Avios?label=Version&color=blue)
-![Static Badge](https://img.shields.io/badge/Swift->=v5.4-%23F05138)
+![Static Badge](https://img.shields.io/badge/Swift-v6.1.0-%23F05138)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/XenoPOMP/Avios/swift.yml?label=Tests)
 
 <hr/>

@@ -5,15 +5,12 @@ on: [push]
 jobs:
   test:
     name: Running tests for package
-    strategy:
-      matrix:
-        swift: ["5.4", "6.1.0"]
     runs-on: macos-latest
     steps:
       - uses: swift-actions/setup-swift@v2
         name: 🐦 Setting up Swift environment
         with:
-          swift-version: ${{ matrix.swift }}
+          swift-version: '6.1.0'
       - uses: actions/checkout@v4
         name: 🤖 Fetching repository
       - name: 🔨 Building project
