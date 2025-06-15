@@ -17,9 +17,10 @@ fileprivate func typicodeUrl(_ route: String) -> String {
     return "https://jsonplaceholder.typicode.com/\(route)"
 }
 
-fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod) async throws {
+fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod, statusCode: Int = 200) async throws {
     let (_, res) = try await Avios.shared.custom(typicodeUrl(route), method: method)
     #expect(res.isOk())
+    #expect(res.httpResponse?.statusCode == statusCode)
 }
 
 @Test func getMethod() async throws {
@@ -36,7 +37,7 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod) asy
 }
 
 @Test func postMethod() async throws {
-    try await expectThatOk("posts", method: .post)
+    try await expectThatOk("posts", method: .post, statusCode: 201)
 }
 
 @Test func putMethod() async throws {
@@ -49,4 +50,9 @@ fileprivate func expectThatOk(_ route: String = "posts", method: HttpMethod) asy
 
 @Test func deleteMethod() async throws {
     try await expectThatOk("posts/1", method: .delete)
+}
+
+@Test func handleStatusCodes() async throws {
+    let (_, res) = try await Avios.shared.custom(typicodeUrl("this-path-does-not-exist"), method: .patch)
+    #expect(res.httpResponse?.statusCode == 404)
 }
