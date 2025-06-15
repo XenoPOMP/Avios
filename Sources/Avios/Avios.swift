@@ -45,7 +45,9 @@ typealias Headers = [String: String]
 typealias AviosResponse = (Data, URLResponse)
 
 /// Elegant implementation of networking, using concepts from  axios (JavaScript library)
-class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate {
+@available(macOS 13, *)
+@available(iOS 12, *)
+class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
     
     /// Generate Avios client with default options
