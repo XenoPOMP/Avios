@@ -63,3 +63,7 @@ let body = PostDto(title: "foo", body: "bar", usedId: 1)
 let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, headers: [
     "Content-type": "application/json; charset=UTF-8"
 ])
+```
+
+## Todo
+[ ] Base URL option
