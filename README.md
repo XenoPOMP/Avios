@@ -41,3 +41,19 @@ func fetchPosts() async throws {
     return posts
 }
 ```
+
+### Requests with body
+```swift
+struct PostDto: Codable {
+    var title: String
+    var body: String
+    var usedId: Int
+}
+
+let body = PostDto(title: "foo", body: "bar", usedId: 1)
+
+// The logic is the same as written before, but you have to pass
+// body argument that conforms to Encodable
+let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, headers: [
+    "Content-type": "application/json; charset=UTF-8"
+])
