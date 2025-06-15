@@ -3,6 +3,12 @@
 <h1>Avios</h1>
 </div>
 
+![GitHub Tag](https://img.shields.io/github/v/tag/XenoPOMP/Avios?label=Version&color=blue)
+![Static Badge](https://img.shields.io/badge/Swift-v6.1.0-%23F05138)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/XenoPOMP/Avios/swift.yml?label=Tests)
+
+<hr/>
+
 Native networking solution that uses concepts from [Axios.js](https://axios-http.com/docs/intro)
 
 ## Usage
