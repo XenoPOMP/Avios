@@ -17,10 +17,18 @@ extension HTTPURLResponse {
 extension URLResponse {
     func isOk() -> Bool {        
         // Check if response is incorrect format here
-        guard let response = self as? HTTPURLResponse else {
+        guard let response = self.httpResponse else {
             return false
         }
         
         return response.isResponseOk()
+    }
+    
+    var httpResponse: HTTPURLResponse? {
+        guard let response = self as? HTTPURLResponse else {
+            return nil
+        }
+        
+        return response
     }
 }
