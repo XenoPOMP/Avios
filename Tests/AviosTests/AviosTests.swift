@@ -1,7 +1,7 @@
 import Testing
 @testable import Avios
 
-fileprivate struct Post: Codable, Hashable {
+struct Post: Codable, Hashable {
     var userId: Int
     var id: Int
     var title: String
@@ -23,7 +23,7 @@ fileprivate struct NonPost: Codable {
 /// // Argument have to be not starting with slash
 /// let getPostsEndpoint: String = typicodeUrl("posts")
 /// ```
-fileprivate func typicodeUrl(_ route: String) -> String {
+func typicodeUrl(_ route: String) -> String {
     return "https://jsonplaceholder.typicode.com/\(route)"
 }
 

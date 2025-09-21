@@ -17,13 +17,16 @@ public enum AviosError: Error {
 @available(iOS 13, *)
 public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unchecked Sendable {
     private var defaultHeaders: Headers
+    private var baseUrl: String
     
     public init(
         defaultHeaders: Headers = [
             "Content-Type": "application/json"
-        ]
+        ],
+        baseUrl: String = ""
     ) {
         self.defaultHeaders = defaultHeaders
+        self.baseUrl = baseUrl
     }
     
     /// Shared instance of Avios
@@ -36,7 +39,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         headers: Headers? = nil
     ) throws -> URLRequest {
         // Try parsing stringified url. If it fails, throw an error
-        guard let targetUrl = URL(string: url) else { throw AviosError.invalidRequest }
+        guard let targetUrl = URL(string: "\(baseUrl)\(url)") else { throw AviosError.invalidRequest }
         // Form request with provided arguments
         var request = URLRequest(url: targetUrl)
         
