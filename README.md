@@ -28,7 +28,7 @@ struct Post: Codable {
 func fetchPosts() async throws {
     // Getting data
     // Available methods are: .get, .post, .patch, .update, .put, .delete
-    let (data, response) = try await Avios.shared.get("https://jsonplaceholder.typicode.com/posts", headers: nil)
+    let (data, response) = try await Avios.shared.get("https://jsonplaceholder.typicode.com/posts")
     
     // Handling response
     guard response.isOk() else { throw Error }
@@ -66,4 +66,5 @@ let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, 
 ```
 
 ## Todo
-- [ ] Base URL option
+- [x] Base URL option
+- [ ] WebSockets support
