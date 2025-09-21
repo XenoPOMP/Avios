@@ -67,4 +67,3 @@ let (data, res) = try await Avios.shared.post(typicodeUrl("posts"), body: body, 
 
 ## Todo
 - [x] Base URL option
-- [ ] WebSockets support
