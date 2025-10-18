@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public import SwiftJson
+@_exported import SwiftJson
 
 public enum AviosError: Error {
     /// Error with parsing stringified url
