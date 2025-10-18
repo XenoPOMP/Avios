@@ -6,6 +6,7 @@
 //
 
 import Foundation
+public import SwiftJson
 
 public enum AviosError: Error {
     /// Error with parsing stringified url
@@ -71,7 +72,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
     }
     
     /// Define custom HTTP Request with body
-    public func custom<Body : Encodable>(
+    public func custom<Body : Codable>(
         _ url: String,
         method: HttpMethod,
         body: Body,
@@ -81,8 +82,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         var request = try createRequest(from: url, method: method, headers: headers)
         
         // Encode the body
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(body)
+        let data: Data = try JSON.stringify(body)
         // Apply body to request
         request.httpBody = data
         
@@ -99,7 +99,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         try await self.custom(url, method: .post, headers: headers)
     }
     
-    public func post<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Encodable {
+    public func post<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Codable {
         try await self.custom(url, method: .post, body: body, headers: headers)
     }
     
@@ -107,7 +107,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         try await self.custom(url, method: .patch, headers: headers)
     }
     
-    public func patch<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Encodable {
+    public func patch<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Codable {
         try await self.custom(url, method: .patch, body: body, headers: headers)
     }
     
@@ -115,7 +115,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         try await self.custom(url, method: .update, headers: headers)
     }
     
-    public func update<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Encodable {
+    public func update<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Codable {
         try await self.custom(url, method: .update, body: body, headers: headers)
     }
     
@@ -123,7 +123,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         try await self.custom(url, method: .put, headers: headers)
     }
     
-    public func put<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Encodable {
+    public func put<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Codable {
         try await self.custom(url, method: .put, body: body, headers: headers)
     }
     
@@ -131,7 +131,7 @@ public class Avios: NSObject, URLSessionTaskDelegate, HttpMethodDelegate, @unche
         try await self.custom(url, method: .delete, headers: headers)
     }
     
-    public func delete<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Encodable {
+    public func delete<Body>(_ url: String, body: Body, headers: Headers? = nil) async throws -> AviosResponse where Body : Codable {
         try await self.custom(url, method: .delete, body: body, headers: headers)
     }
 }
