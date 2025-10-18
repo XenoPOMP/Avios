@@ -41,7 +41,7 @@ struct MainTests {
         #expect(response.isOk())
         
         // Trying to decode posts here
-        let posts = try data.decode(into: [Post].self)
+        let posts: [Post] = try JSON.parse(data)
         
         // Array should be non-empty
         #expect(posts.count > 0)
@@ -54,11 +54,11 @@ struct MainTests {
         #expect(response.isOk())
         
         // Trying to decode posts here
-        _ = try data.decode(into: Post.self)
+        let _: Post = try JSON.parse(data)
         
         // Code below should fail
         #expect(throws: Error.self) {
-            _ = try data.decode(into: NonPost.self)
+            let _: NonPost = try JSON.parse(data)
         }
     }
 
@@ -94,7 +94,7 @@ struct MainTests {
         #expect(res.httpResponse?.statusCode == 201)
         
         // Decoding the result
-        let result = try data.decode(into: PostDto.self)
+        let result: PostDto = try JSON.parse(data)
         
         #expect(body.body == result.body)
         #expect(body.title == result.title)

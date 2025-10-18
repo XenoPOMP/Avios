@@ -1,0 +1,15 @@
+{
+  "originHash" : "05217994706fc67cb5eb45f3b23165c41daf8bdfcb19c249f4d0a2d74ac06b9e",
+  "pins" : [
+    {
+      "identity" : "swiftjson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/XenoPOMP/SwiftJson.git",
+      "state" : {
+        "revision" : "be9aafdc7a0a59bd86bdec924f3c94d0b27103ad",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}

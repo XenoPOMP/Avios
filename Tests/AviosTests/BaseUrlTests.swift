@@ -16,7 +16,7 @@ struct BaseUrlTests {
         #expect(response.isOk())
         
         // Trying to decode posts here
-        let posts = try data.decode(into: [Post].self)
+        let posts: [Post] = try JSON.parse(data)
         
         // Array should be non-empty
         #expect(posts.count > 0)
