@@ -29,10 +29,10 @@ func fetchPosts() async throws {
     // Getting data
     // Available methods are: .get, .post, .patch, .update, .put, .delete
     let (data, response) = try await Avios.shared.get("https://jsonplaceholder.typicode.com/posts")
-    
+
     // Handling response
     guard response.isOk() else { throw Error }
-    
+
     // Handling status code
     switch response.httpResponse?.statusCode {
     case 200:
@@ -41,9 +41,9 @@ func fetchPosts() async throws {
         print("Status code is 201 (CREATED)")
     // etc...
     }
-    
+
     // Decoding data
-    let posts = try data.decode(into: [Post].self)
+    let posts: [Post] = try JSON.parse(data)
     return posts
 }
 ```
